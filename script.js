@@ -13,26 +13,51 @@ const divideBtn = document.getElementById("/");
 const addBtn = document.getElementById("+");
 const equalsBtn = document.getElementById("=");
 const cancelBtn = document.getElementById("C");
+
+const operationBtns = document.querySelectorAll(".operation-button");
+
 let displayContent = document.querySelector(".screen-content");
 let resultsArray = [];
 
+// Return the value of the pressed Operation Buttons
+const getOperation = function () {
+  for (let i = 0; i < operationBtns.length; i++) {
+    if (operationBtns[i].id == "+") {
+      console.log("add");
+    } else if (operationBtns[i].id == "-") {
+      return "subtract";
+    } else if (operationBtns[i].id == "*") {
+      return "multiply";
+    } else if (operationBtns[i].id == "/") {
+      return "divide";
+    }
+  }
+};
+for (let i = 0; i < operationBtns.length; i++) {
+  operationBtns[i].addEventListener("click", getOperation);
+}
+
+// Display content in screen div
 const displayContentFunc = function (key) {
   displayContent.textContent = key;
 };
 
-const buttons = document.querySelectorAll(".calculator-button");
-for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener("click", function () {
-    resultsArray.push(buttons[i].textContent);
-    let newArr = resultsArray.join("");
-    displayContentFunc(newArr);
-  });
-}
+// On all buttons, adds the value to an array on click
+// const buttons = document.querySelectorAll(".calculator-button");
+// for (let i = 0; i < buttons.length; i++) {
+//   buttons[i].addEventListener("click", function () {
+//     resultsArray.push(buttons[i].textContent);
+//     let newArr = resultsArray.join("");
+//     displayContentFunc(newArr);
+//   });
+// }
 
+// Two number variables and an operator variable
 const firstNum = 5;
 const secondNum = 100;
 let operator = "add";
 
+// Operator function that takes an operator and two numbers
 const operate = function (op, num1, num2) {
   if (op === "add") {
     return add(num1, num2);
@@ -45,6 +70,7 @@ const operate = function (op, num1, num2) {
   }
 };
 
+// Basic calculator functions
 const add = function (a, b) {
   console.log(a + b);
   return a + b;
