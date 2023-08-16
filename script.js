@@ -15,6 +15,7 @@ const equalsBtn = document.getElementById("=");
 const cancelBtn = document.getElementById("C");
 
 const operationBtns = document.querySelectorAll(".operation-button");
+const numberBtns = document.querySelectorAll(".number-button");
 
 let displayContent = document.querySelector(".screen-content");
 let resultsArray = [];
@@ -35,6 +36,35 @@ const getOperation = function () {
 };
 for (let i = 0; i < operationBtns.length; i++) {
   operationBtns[i].addEventListener("click", getOperation);
+}
+
+// Return the value of the pressed Number Buttons
+const getNumber = function () {
+  for (let i = 0; i < numberBtns.length; i++) {
+    if (numberBtns[i].id == "1") {
+      console.log("one");
+      return;
+    } else if (numberBtns[i].id == "2") {
+      console.log("two");
+    } else if (numberBtns[i].id == "3") {
+      console.log("three");
+    } else if (numberBtns[i].id == "4") {
+      console.log("four");
+    } else if (numberBtns[i].id == "5") {
+      console.log("five");
+    } else if (numberBtns[i].id == "6") {
+      console.log("six");
+    } else if (numberBtns[i].id == "7") {
+      console.log("seven");
+    } else if (numberBtns[i].id == "8") {
+      console.log("eight");
+    } else if (numberBtns[i].id == "9") {
+      console.log("nine");
+    }
+  }
+};
+for (let i = 0; i < numberBtns.length; i++) {
+  numberBtns[i].addEventListener("click", getNumber);
 }
 
 // Display content in screen div
