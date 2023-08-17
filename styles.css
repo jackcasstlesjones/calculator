@@ -17,13 +17,14 @@
   margin-bottom: 16px;
   display: flex;
   align-items: center;
+  font-size: 42px;
+  padding: 10px;
 }
 
 .screen-content {
   color: black;
   padding: 10px;
   margin-left: auto;
-  font-size: 42px;
 }
 
 .calculator-button {
@@ -36,4 +37,13 @@
   display: grid;
 
   grid-template-columns: repeat(4, 1fr);
+}
+
+.first-num-placeholder {
+  font-size: 28px;
+  width: 120px;
+  height: 50px;
+  padding: 10px;
+  margin-bottom: auto;
+  /* background-color: red; */
 }
