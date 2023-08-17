@@ -14,106 +14,106 @@ const addBtn = document.getElementById("+");
 const equalsBtn = document.getElementById("=");
 const cancelBtn = document.getElementById("C");
 
+const buttons = document.querySelectorAll(".calculator-button");
 const operationBtns = document.querySelectorAll(".operation-button");
+console.log(operationBtns);
 const numberBtns = document.querySelectorAll(".number-button");
 
+// Two number variables and an operator variable
+let firstNum = [];
+let secondNum = [];
+let operator = [];
+
 let displayContent = document.querySelector(".screen-content");
-let resultsArray = [];
-
-// Return the value of the pressed Operation Buttons
-const getOperation = function () {
-  for (let i = 0; i < operationBtns.length; i++) {
-    if (operationBtns[i].id == "+") {
-      console.log("add");
-    } else if (operationBtns[i].id == "-") {
-      return "subtract";
-    } else if (operationBtns[i].id == "*") {
-      return "multiply";
-    } else if (operationBtns[i].id == "/") {
-      return "divide";
-    }
-  }
-};
-for (let i = 0; i < operationBtns.length; i++) {
-  operationBtns[i].addEventListener("click", getOperation);
-}
-
-// Return the value of the pressed Number Buttons
-const getNumber = function () {
-  for (let i = 0; i < numberBtns.length; i++) {
-    if (numberBtns[i].id == "1") {
-      console.log("one");
-      return;
-    } else if (numberBtns[i].id == "2") {
-      console.log("two");
-    } else if (numberBtns[i].id == "3") {
-      console.log("three");
-    } else if (numberBtns[i].id == "4") {
-      console.log("four");
-    } else if (numberBtns[i].id == "5") {
-      console.log("five");
-    } else if (numberBtns[i].id == "6") {
-      console.log("six");
-    } else if (numberBtns[i].id == "7") {
-      console.log("seven");
-    } else if (numberBtns[i].id == "8") {
-      console.log("eight");
-    } else if (numberBtns[i].id == "9") {
-      console.log("nine");
-    }
-  }
-};
-for (let i = 0; i < numberBtns.length; i++) {
-  numberBtns[i].addEventListener("click", getNumber);
-}
-
-// Display content in screen div
+//////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Display content in screen div
 const displayContentFunc = function (key) {
   displayContent.textContent = key;
 };
+//////////////////////////////////////////////////////////////////////////////////////
 
-// On all buttons, adds the value to an array on click
-// const buttons = document.querySelectorAll(".calculator-button");
-// for (let i = 0; i < buttons.length; i++) {
-//   buttons[i].addEventListener("click", function () {
-//     resultsArray.push(buttons[i].textContent);
-//     let newArr = resultsArray.join("");
-//     displayContentFunc(newArr);
-//   });
-// }
+//////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 
-// Two number variables and an operator variable
-const firstNum = 5;
-const secondNum = 100;
-let operator = "add";
+// First array storer eventListener
+let resultsArrayOne = [];
+for (let i = 0; i < numberBtns.length; i++) {
+  numberBtns[i].addEventListener("click", function () {
+    if (operator.length == 1) {
+      return;
+    }
+    resultsArrayOne.push(numberBtns[i].id);
+    firstNum = resultsArrayOne.join("");
+
+    console.log(firstNum);
+  });
+}
+
+// Stores operator buttons in operator array
+for (let i = 0; i < operationBtns.length; i++) {
+  operationBtns[i].addEventListener("click", function () {
+    if (operator <= 1) {
+      operator.push(operationBtns[i].id);
+      jointOperator = operator.join("");
+      console.log(jointOperator);
+      return jointOperator;
+    }
+  });
+}
+
+// Push to second array if operator is in its own array
+let resultsArrayTwo = [];
+for (let i = 0; i < numberBtns.length; i++) {
+  numberBtns[i].addEventListener("click", function () {
+    if (operator.length == 1) {
+      resultsArrayTwo.push(numberBtns[i].id);
+      secondNum = resultsArrayTwo.join("");
+
+      console.log(secondNum);
+    }
+  });
+}
+
+equalsBtn.addEventListener("click", function () {
+  // console.log(jointOperator, firstNum, secondNum);
+  return console.log(operate(jointOperator, firstNum, secondNum));
+});
+
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 // Operator function that takes an operator and two numbers
 const operate = function (op, num1, num2) {
-  if (op === "add") {
+  Number(num2);
+  if (op === "+") {
     return add(num1, num2);
-  } else if (op === "subtract") {
+  } else if (op === "-") {
     return subtract(num1, num2);
-  } else if (op === "multiply") {
+  } else if (op === "*") {
     return multiply(num1, num2);
-  } else if (op === "divide") {
+  } else if (op === "/") {
     return divide(num1, num2);
   }
 };
 
 // Basic calculator functions
 const add = function (a, b) {
-  console.log(a + b);
   return a + b;
 };
 const subtract = function (a, b) {
-  console.log(a - b);
   return a - b;
 };
 const multiply = function (a, b) {
-  console.log(a * b);
   return a * b;
 };
 const divide = function (a, b) {
-  console.log(a / b);
   return a / b;
 };
