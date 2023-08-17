@@ -16,19 +16,12 @@ let operator = "";
 
 //////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Display content in screen div
-const displayContentFunc = function (number) {
+const updateDisplay = function (number) {
   displayContent.textContent = number;
 };
 
-// Create placeholder element for first number
-const createPlaceHolder = function () {
-  const placeholder = document.createElement("div");
-  screenContainer.appendChild.placeholder;
-};
-
-createPlaceHolder();
 //////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -37,11 +30,11 @@ for (let i = 0; i < numberBtns.length; i++) {
   numberBtns[i].addEventListener("click", function () {
     if (operator.length < 1) {
       firstNum = firstNum.concat(numberBtns[i].id);
-      displayContentFunc(firstNum);
+      updateDisplay(firstNum);
       console.log(firstNum);
     } else if (operator.length == 1) {
       secondNum = secondNum.concat(numberBtns[i].id);
-      displayContentFunc(secondNum);
+      updateDisplay(secondNum);
       console.log(secondNum);
     }
   });
@@ -50,17 +43,15 @@ for (let i = 0; i < numberBtns.length; i++) {
 // Stores operator buttons in operator array
 for (let i = 0; i < operationBtns.length; i++) {
   operationBtns[i].addEventListener("click", function () {
-    if (operator.length < 1) {
-      operator = operator.concat(operationBtns[i].id);
-      firstNumPlaceholder.textContent = firstNum + " " + operator;
-      console.log(operator);
-    }
+    operator = operator.concat(operationBtns[i].id);
+    firstNumPlaceholder.textContent = firstNum + " " + operator;
+    console.log(operator);
   });
 }
 
 equalsBtn.addEventListener("click", function () {
   firstNumPlaceholder.textContent = "";
-  displayContentFunc(operate(operator, firstNum, secondNum));
+  updateDisplay(operate(operator, firstNum, secondNum));
   firstNum = "";
   secondNum = "";
   operator = "";
@@ -71,7 +62,7 @@ cancelBtn.addEventListener("click", function () {
   firstNum = "";
   secondNum = "";
   operator = "";
-  displayContentFunc(firstNum);
+  updateDisplay(firstNum);
 });
 
 //////////////////////////////////////////////////
