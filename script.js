@@ -20,9 +20,9 @@ console.log(operationBtns);
 const numberBtns = document.querySelectorAll(".number-button");
 
 // Two number variables and an operator variable
-let firstNum = [];
-let secondNum = [];
-let operator = [];
+let firstNum = "";
+let secondNum = "";
+let operator = "";
 
 let displayContent = document.querySelector(".screen-content");
 //////////////////////////////////////////////////////////////////////////////////////
@@ -35,48 +35,49 @@ const displayContentFunc = function (key) {
 //////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////
 
-// First array storer eventListener
-let resultsArrayOne = [];
+// Push number buttons value ID to firstNum or secondNum variables depending on .length of operator variable
 for (let i = 0; i < numberBtns.length; i++) {
   numberBtns[i].addEventListener("click", function () {
-    if (operator.length == 1) {
-      return;
+    if (operator.length < 1) {
+      firstNum = firstNum.concat(numberBtns[i].id);
+      console.log(firstNum);
+    } else if (operator.length == 1) {
+      secondNum = secondNum.concat(numberBtns[i].id);
+      console.log(secondNum);
     }
-    resultsArrayOne.push(numberBtns[i].id);
-    firstNum = resultsArrayOne.join("");
-
-    console.log(firstNum);
   });
 }
 
 // Stores operator buttons in operator array
 for (let i = 0; i < operationBtns.length; i++) {
   operationBtns[i].addEventListener("click", function () {
-    if (operator <= 1) {
-      operator.push(operationBtns[i].id);
-      jointOperator = operator.join("");
-      console.log(jointOperator);
-      return jointOperator;
+    if (operator.length < 1) {
+      operator = operator.concat(operationBtns[i].id);
+      console.log(operator);
     }
   });
 }
 
 // Push to second array if operator is in its own array
-let resultsArrayTwo = [];
-for (let i = 0; i < numberBtns.length; i++) {
-  numberBtns[i].addEventListener("click", function () {
-    if (operator.length == 1) {
-      resultsArrayTwo.push(numberBtns[i].id);
-      secondNum = resultsArrayTwo.join("");
-
-      console.log(secondNum);
-    }
-  });
-}
+// let resultsArrayTwo = [];
+// for (let i = 0; i < numberBtns.length; i++) {
+//   numberBtns[i].addEventListener("click", function () {
+//     if (operator.length == 1) {
+//     }
+//   });
+// }
 
 equalsBtn.addEventListener("click", function () {
-  // console.log(jointOperator, firstNum, secondNum);
-  return console.log(operate(jointOperator, firstNum, secondNum));
+  console.log(operate(operator, firstNum, secondNum));
+  firstNum = "";
+  secondNum = "";
+  operator = "";
+});
+
+cancelBtn.addEventListener("click", function () {
+  firstNum = "";
+  secondNum = "";
+  operator = "";
 });
 
 //////////////////////////////////////////////////
@@ -92,7 +93,6 @@ equalsBtn.addEventListener("click", function () {
 
 // Operator function that takes an operator and two numbers
 const operate = function (op, num1, num2) {
-  Number(num2);
   if (op === "+") {
     return add(num1, num2);
   } else if (op === "-") {
