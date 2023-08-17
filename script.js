@@ -39,10 +39,10 @@ const displayContentFunc = function (key) {
 for (let i = 0; i < numberBtns.length; i++) {
   numberBtns[i].addEventListener("click", function () {
     if (operator.length < 1) {
-      firstNum = firstNum.concat(numberBtns[i].id);
+      firstNum = Number(firstNum.concat(numberBtns[i].id));
       console.log(firstNum);
     } else if (operator.length == 1) {
-      secondNum = secondNum.concat(numberBtns[i].id);
+      secondNum = Number(secondNum.concat(numberBtns[i].id));
       console.log(secondNum);
     }
   });
