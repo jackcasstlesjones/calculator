@@ -5,7 +5,7 @@ const firstNumPlaceholder = document.querySelector(".first-num-placeholder");
 
 const buttons = document.querySelectorAll(".calculator-button");
 const operationBtns = document.querySelectorAll(".operation-button");
-console.log(operationBtns);
+
 const numberBtns = document.querySelectorAll(".number-button");
 let displayContent = document.querySelector(".screen-content");
 
@@ -14,16 +14,10 @@ let firstNum = "";
 let secondNum = "";
 let operator = "";
 
-//////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////// Display content in screen div
+// Display content in screen div
 const updateDisplay = function (number) {
   displayContent.textContent = number;
 };
-
-//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////
 
 // Push number buttons value ID to firstNum or secondNum variables depending on .length of operator variable
 for (let i = 0; i < numberBtns.length; i++) {
@@ -31,11 +25,9 @@ for (let i = 0; i < numberBtns.length; i++) {
     if (operator.length < 1) {
       firstNum = firstNum.concat(numberBtns[i].id);
       updateDisplay(firstNum);
-      console.log(firstNum);
     } else if (operator.length == 1) {
       secondNum = secondNum.concat(numberBtns[i].id);
       updateDisplay(secondNum);
-      console.log(secondNum);
     }
   });
 }
@@ -43,37 +35,50 @@ for (let i = 0; i < numberBtns.length; i++) {
 // Stores operator buttons in operator array
 for (let i = 0; i < operationBtns.length; i++) {
   operationBtns[i].addEventListener("click", function () {
+    if (operator.length === 1) {
+      doCalculation();
+    }
     operator = operator.concat(operationBtns[i].id);
     firstNumPlaceholder.textContent = firstNum + " " + operator;
-    console.log(operator);
   });
 }
 
-equalsBtn.addEventListener("click", function () {
+// Calculator calculation function
+const doCalculation = function () {
   firstNumPlaceholder.textContent = "";
-  updateDisplay(operate(operator, firstNum, secondNum));
-  firstNum = "";
+  if (operator === "/" && secondNum === "0") {
+    doClear();
+    return updateDisplay("STOP IT!!!");
+  }
+  calculatorResult = operate(operator, firstNum, secondNum);
+  updateDisplay(Math.round(calculatorResult * 1000) / 1000);
+  firstNum = Math.round(calculatorResult * 1000) / 1000;
   secondNum = "";
   operator = "";
-});
+};
 
-cancelBtn.addEventListener("click", function () {
+// Calculator clear function
+const doClear = function () {
   firstNumPlaceholder.textContent = "";
   firstNum = "";
   secondNum = "";
   operator = "";
   updateDisplay(firstNum);
+};
+
+// Equals button event listener
+equalsBtn.addEventListener("click", function () {
+  if (operator.length < 1 || secondNum.length < 1) {
+    return doClear();
+  }
+  doCalculation();
 });
 
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
+// Cancel button clears everything
+cancelBtn.addEventListener("click", function () {
+  doClear();
+});
+
 //////////////////////////////////////////////////
 
 // Operator function that takes an operator and two numbers
