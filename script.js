@@ -59,10 +59,10 @@ const doCalculation = function () {
 
 // Calculator clear function
 const doClear = function () {
-  firstNumPlaceholder.textContent = "";
   firstNum = "";
   secondNum = "";
   operator = "";
+  firstNumPlaceholder.textContent = "";
   updateDisplay(firstNum);
 };
 
@@ -72,6 +72,10 @@ equalsBtn.addEventListener("click", function () {
     return doClear();
   }
   doCalculation();
+  firstNumPlaceholder.textContent = "";
+  firstNum = "";
+  secondNum = "";
+  operator = "";
 });
 
 // Cancel button clears everything
